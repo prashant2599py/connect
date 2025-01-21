@@ -7,8 +7,8 @@ import messageRoutes from '../backend/routes/message.routes.js'
 import userRoutes from './routes/user.routes.js'
 import connectToMongoDb from './db/connectToMongoDb.js';
 import cookieParser from 'cookie-parser';
+import { app, server } from './socket/socket.js';
 const PORT = process.env.PORT || 5000
-const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -22,7 +22,7 @@ app.get("/" , (req, res) => {
 })
 
 
-app.listen(5050, () => {
+server.listen(5050, () => {
     connectToMongoDb();
     console.log(`SERVER RUNNING ON ${PORT}` )
 });
