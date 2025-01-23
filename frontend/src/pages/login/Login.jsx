@@ -1,27 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const {loading , login} = useLogin();
+  
+  const handleSubmit = async(e) => {
     e.preventDefault();
-
-    // Basic form validation
-    if (!username || !password) {
-      setError('All fields are required');
-      return;
-    }
-
-
-    // If everything is valid, you can log the form values
-    console.log({
-      username,
-    });
-
+    await login(username, password);
     // Clear form field
     setUsername('');
     setPassword('');
@@ -59,15 +49,15 @@ const Login = () => {
           />
         </div>
 
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
         <button
           type="submit"
+          disabled={loading}
           className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
-          Sign Up
+          {loading ? <span className='loading loading-spinner'></span> : "Login"}
         </button>
-        <span className='mr-2'>Don't have an account ? </span>
+        <span className='mr-2'>Do not have an account ? </span>
         <Link to='/signup'>Signup</Link>
       </form>
     </div>

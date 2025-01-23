@@ -18,7 +18,7 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
 
 app.get("/" , (req, res) => {
-    res.send("Welcome to post 5000")
+    res.send("Welcome to post 5050")
 })
 
 
