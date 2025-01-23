@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify";
 
-const  useGetConversation = ()=> {
+const  useGetConversations = ()=> {
    const [loading, setLoading] = useState(false);
    const [conversations, setConversations] = useState([]);
 
@@ -11,7 +11,7 @@ const  useGetConversation = ()=> {
             try {
                 const res = await fetch('/api/users');
                 const data = await res.json();
-        
+               console.log(data);
                 setConversations(data);
                 if(data.error){
                     throw new Error(data.error);
@@ -29,4 +29,4 @@ const  useGetConversation = ()=> {
    
 }
 
-export default useGetConversation
+export default useGetConversations;
